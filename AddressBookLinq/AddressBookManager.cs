@@ -86,7 +86,8 @@ namespace AddressBookLinq
             dtColumn.Caption = "Email Id";
             //Adding column to the DataColumnCollection.  
             dataTable.Columns.Add(dtColumn);
-            Console.WriteLine("Created the datatable successfuly");
+            InsertDefaultValuesIntoTable();
+            Console.WriteLine("Created the datatable and inserted the data successfuly");
             return dataTable;
         }
 
@@ -162,7 +163,6 @@ namespace AddressBookLinq
         {
             if(dataTable != null)
             {
-                InsertDefaultValuesIntoTable();
                 var contactList = (from contact in dataTable.AsEnumerable() where contact.Field<string>("FirstName") == FirstName select contact).FirstOrDefault();
                 if (contactList != null)
                 {
@@ -182,7 +182,6 @@ namespace AddressBookLinq
         {
             if (dataTable != null)
             {
-                InsertDefaultValuesIntoTable();
                 var contactList = (from contact in dataTable.AsEnumerable() where (contact.Field<string>("State") == state || contact.Field<string>("City") == city) select contact);
                 if(contactList.Count() != 0)
                 {
@@ -204,18 +203,48 @@ namespace AddressBookLinq
                 return $"No DataTable Found";         
         }
 
-        //Retrieve contacts from datatable based on city or state(UC5)
+        //Retrieve contacts count from datatable based on city or state(UC6)
         public static string RetrieveCountBasedOnCityorState()
         {
             if (dataTable != null)
             {
-                InsertDefaultValuesIntoTable();
                 var contactList = (from contact in dataTable.AsEnumerable().GroupBy(c => new { city = c["City"], state = c["State"] }) select contact);
-                foreach (var contact in contactList)
+                if (contactList.Count() != 0)
                 {
-                    Console.WriteLine($"City : {contact.Key.city} \tCount : {contact.Count()} \tState : {contact.Key.state} \tCount : {contact.Count()}");
+                    foreach (var contact in contactList)
+                    {
+                        Console.WriteLine($"City : {contact.Key.city} \tCount : {contact.Count()} \tState : {contact.Key.state} \tCount : {contact.Count()}");
+                    }
+                    return "Found The Given Contacts Successfully";
                 }
-                return "Found The Given Contacts Successfully";
+                else
+                    return "No Contact Found";
+            }
+            else
+                return $"No DataTable Found";
+        }
+
+        //Retrieve sorted contacts from datatable by giving city (UC7)
+        public static string GivenCitySortContactBasedOnName(string city)
+        {
+            if (dataTable != null)
+            {
+                var contactList = (from contact in dataTable.AsEnumerable() orderby contact.Field<string>("FirstName") where contact.Field<string>("City").Equals(city) select contact);
+                if (contactList.Count() != 0)
+                {
+                    foreach (DataColumn dtColumns in dataTable.Columns)
+                    {
+                        Console.Write(dtColumns + "    \t");
+                    }
+                    Console.WriteLine();
+                    foreach (var dtRows in contactList)
+                    {
+                        Console.WriteLine("{0}\t\t{1}   \t{2}   \t{3}  \t{4}  \t{5}  \t{6} \t{7}", dtRows["FirstName"], dtRows["LastName"], dtRows["Address"], dtRows["City"], dtRows["State"], dtRows["ZipCode"], dtRows["PhoneNumber"], dtRows["EmailId"]);
+                    }
+                    return $"Found The Given Contacts Successfully";
+                }
+                else
+                    return "The Given Contact Is Not Found";
             }
             else
                 return $"No DataTable Found";

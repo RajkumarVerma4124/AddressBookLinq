@@ -80,5 +80,17 @@ namespace AddressBookLinqTesting
             var actual = AddressBookManager.RetrieveCountBasedOnCityorState();
             Assert.AreEqual(expected, actual);
         }
+
+        //Testing to check the sort contact is retrieved or not from the datatable(UC7-TC7.1)
+        [TestMethod]
+        [DataRow("Mumbai","Found The Given Contacts Successfully")]
+        [DataRow("NaviMumbai","Found The Given Contacts Successfully")]
+        [DataRow("Mum", "The Given Contact Is Not Found")]
+        public void TestRetrieveSortedContactByName(string city, string expected)
+        {
+            AddressBookManager.CreateDataTable();
+            var actual = AddressBookManager.GivenCitySortContactBasedOnName(city);
+            Assert.AreEqual(expected, actual);
+        }
     }
 }

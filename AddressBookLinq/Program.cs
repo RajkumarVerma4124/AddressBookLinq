@@ -21,8 +21,8 @@ namespace AddressBookLinq
             {
                 while(true)
                 {
-                    Console.WriteLine("1: Create DataTable \n2: Insert Default Contact Into DataTable \n3: Insert New Contact Into DataTable \n4: Display DataTable \n5: Edit Contact"+
-                        "\n6: Deleted Contact \n7: Retrieve Contact Based On City Or State \n8: Count Based On City Or State \n9: Exit");
+                    Console.WriteLine("1: Create DataTable And Insert Default Contact Into DataTable \n2: Insert New Contact Into DataTable \n3: Display DataTable \n4: Edit Contact"+
+                        "\n5: Deleted Contact \n6: Retrieve Contact Based On City Or State \n7: Count Or Size Based On City Or State \n8: Sorted Records \n9: Exit");
                     Console.Write("Enter a choice from above : ");
                     bool flag = int.TryParse(Console.ReadLine(), out int choice);
                     if(flag)
@@ -30,15 +30,10 @@ namespace AddressBookLinq
                         switch(choice)
                         {
                             case 1:
-                                //Calling the method to createtable(UC1)
+                                //Calling the method to createtable and insert default contact in addressbook table(UC1 && UC2)
                                 AddressBookManager.CreateDataTable();
                                 break;
                             case 2:
-                                //Calling the method to insert default contact in addressbook table(UC2)
-                                resStr = AddressBookManager.InsertDefaultValuesIntoTable();
-                                Console.WriteLine(resStr);
-                                break;
-                            case 3:
                                 //Calling the method to insert new contact in addressbook table(UC2)
                                 //Creating a contact with person details(UC1)
                                 Console.Write("Enter Your First Name : ");
@@ -60,11 +55,11 @@ namespace AddressBookLinq
                                 resStr = AddressBookManager.InsertNewContactTable(contact);
                                 Console.WriteLine(resStr);
                                 break;
-                            case 4:
+                            case 3:
                                 //Calling the method to all values from addressbook table(UC2)
                                 AddressBookManager.DisplayDataTable();
                                 break;
-                            case 5:
+                            case 4:
                                 //Calling the method to edit addressbook table(UC3)
                                 Console.Write("Enter The First Name Of The Contact To Modify : ");
                                 string fName = Console.ReadLine();  
@@ -75,14 +70,14 @@ namespace AddressBookLinq
                                 resStr = AddressBookManager.EditAddressBookDataTable(fName, cName, cValue);
                                 Console.WriteLine(resStr);
                                 break;
-                            case 6:
+                            case 5:
                                 //Calling the method to delete a contact from addressbook table(UC4)
                                 Console.Write("Enter The First Name Of The Contact To Delete : ");
                                 string firstName = Console.ReadLine();
                                 resStr = AddressBookManager.DeleteContactInDataTable(firstName);
                                 Console.WriteLine(resStr);
                                 break;
-                            case 7:
+                            case 6:
                                 //Calling the method to retrieve records based on city and state from addressbook table(UC5)
                                 Console.Write("Enter The City Name Of The Contact : ");
                                 string city = Console.ReadLine();
@@ -91,9 +86,16 @@ namespace AddressBookLinq
                                 resStr = AddressBookManager.RetrieveContactBasedOnCityorState(city, state);
                                 Console.WriteLine(resStr);
                                 break;
-                            case 8:
+                            case 7:
                                 //Calling the method to count by city or state from addressbook table(UC6)
                                 resStr = AddressBookManager.RetrieveCountBasedOnCityorState();
+                                Console.WriteLine(resStr);
+                                break;
+                            case 8:
+                                //Calling the method to retrieve sorted records based on name when given city(UC7)
+                                Console.Write("Enter The City Name Of The Contact : ");
+                                string cityName = Console.ReadLine();
+                                resStr = AddressBookManager.GivenCitySortContactBasedOnName(cityName);
                                 Console.WriteLine(resStr);
                                 break;
                             case 9:
