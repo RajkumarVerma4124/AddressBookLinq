@@ -12,25 +12,16 @@ namespace AddressBookLinq
     /// </summary>
     public class AddressBookManager
     {
-        //Creating the object of datatable
+        //Creating the object of datatable and addressbook
         public static DataTable dataTable;
+        public static AddressBook contact;
 
         //Method to create datatable with addressbook columns(UC1)
-        public static void CreateDataTable()
+        public static DataTable CreateDataTable()
         {
             //Initializing the datatable
             dataTable = new DataTable("AddressBookLinq");
             DataColumn dtColumn;
-
-            //Creating column addressbookid
-            dtColumn = new DataColumn();
-            dtColumn.DataType = typeof(int);
-            dtColumn.ColumnName = "AddressBookId";
-            dtColumn.Caption = "AddressBook Id";
-            dtColumn.AutoIncrement = true;
-            dtColumn.Unique = true;
-            // Adding column to the DataColumnCollection 
-            dataTable.Columns.Add(dtColumn);
 
             //Creating first name column.    
             dtColumn = new DataColumn();
@@ -72,11 +63,11 @@ namespace AddressBookLinq
             //Adding column to the DataColumnCollection.  
             dataTable.Columns.Add(dtColumn);
 
-            //Creating email column.    
+            //Creating zipcode column.    
             dtColumn = new DataColumn();
-            dtColumn.DataType = typeof(string);
-            dtColumn.ColumnName = "EmailId";
-            dtColumn.Caption = "Email Id";
+            dtColumn.DataType = typeof(long);
+            dtColumn.ColumnName = "ZipCode";
+            dtColumn.Caption = "Zip Code";
             //Adding column to the DataColumnCollection.  
             dataTable.Columns.Add(dtColumn);
 
@@ -88,14 +79,76 @@ namespace AddressBookLinq
             //Adding column to the DataColumnCollection.  
             dataTable.Columns.Add(dtColumn);
 
-            //Creating zipcode column.    
+            //Creating email column.    
             dtColumn = new DataColumn();
-            dtColumn.DataType = typeof(long);
-            dtColumn.ColumnName = "ZipCode";
-            dtColumn.Caption = "Zip Code";
+            dtColumn.DataType = typeof(string);
+            dtColumn.ColumnName = "EmailId";
+            dtColumn.Caption = "Email Id";
             //Adding column to the DataColumnCollection.  
             dataTable.Columns.Add(dtColumn);
             Console.WriteLine("Created the datatable successfuly");
+            return dataTable;
+        }
+
+        //Method to insert default values into the addressbook table(UC2)
+        public static string InsertDefaultValuesIntoTable()
+        {
+            if (dataTable != null)
+            {
+                List<AddressBook> addressBooks = new List<AddressBook>()
+                {
+                    new AddressBook() {FirstName="Raj", LastName="Verma", Address="Ghansoli", City="NaviMumbai", State="Maharashta", EmailId="abc123@gmail.com", PhoneNumber=9874562130, ZipCode=745821},
+                    new AddressBook() {FirstName="Yash", LastName="Verma", Address="Ghansoli", City="NaviMumbai", State="Maharashta", EmailId="abc12@gmail.com", PhoneNumber=9876542130, ZipCode=400789},
+                    new AddressBook() {FirstName="Mansi", LastName="Verma", Address="Ghansoli", City="NaviMumbai", State="Maharashta", EmailId="abc13@gmail.com", PhoneNumber=9875462130, ZipCode=400965},
+                    new AddressBook() {FirstName="Ajay", LastName="Matkar", Address="Chembur", City="Mumbai", State="Maharashta", EmailId="abc143@gmail.com", PhoneNumber=9874563120, ZipCode=400456},
+                    new AddressBook() {FirstName="Aman", LastName="Nikam", Address="Borivai", City="Mumbai", State="Maharashta", EmailId="abc183@gmail.com", PhoneNumber=9874561230, ZipCode=400159},
+                    new AddressBook() {FirstName="Omkar", LastName="Kondvilkar", Address="Andheri", City="Mumbai", State="Maharashta", EmailId="abc173@gmail.com", PhoneNumber=9478562130, ZipCode=400258},
+                    new AddressBook() {FirstName="Vaibhav", LastName="Patil", Address="Kalyan", City="Mumbai", State="Maharashta", EmailId="abc133@gmail.com", PhoneNumber=9748562130, ZipCode=400426},
+                    new AddressBook() {FirstName="Apurva", LastName="Puran", Address="Andheri", City="Mumbai", State="Maharashta", EmailId="abc113@gmail.com", PhoneNumber=9874265130, ZipCode=400705},
+                    new AddressBook() {FirstName="Amit", LastName="Pawar", Address="Govandi", City="NaviMumbai", State="Maharashta", EmailId="abc103@gmail.com", PhoneNumber=9726562130, ZipCode=400706},
+                };
+                //Adding values to datatable
+                foreach (var contact in addressBooks)
+                {
+                    //adding rows from addressbook to data table rows
+                    dataTable.Rows.Add(contact.FirstName, contact.LastName, contact.Address, contact.City, contact.State, contact.ZipCode, contact.PhoneNumber, contact.EmailId);
+                }
+                return "Added The Data Successfully Into The Table";
+            }
+            else
+                return "No DataTable Found";   
+        }
+
+        //Method to insert new values into the addressbook table(UC2)
+        public static string InsertNewContactTable(AddressBook contact)
+        {
+            if(dataTable != null)
+            {
+                //Adding to the table datarow 
+                dataTable.Rows.Add(contact.FirstName, contact.LastName, contact.Address, contact.City, contact.State, contact.ZipCode, contact.PhoneNumber, contact.EmailId);
+                return "Added The Data Successfully Into The Table";
+            }
+            else
+                return "No DataTable Found";           
+        }
+
+        //Method to display all datatable values(UC2)
+        public static void DisplayDataTable()
+        {
+            if(dataTable != null)
+            {
+                foreach (DataColumn dtColumns in dataTable.Columns)
+                {
+                    Console.Write(dtColumns + "    \t");
+                }
+                Console.WriteLine();
+                foreach (DataRow dtRows in dataTable.Rows)
+                {
+                    Console.WriteLine($"{dtRows["FirstName"]}\t\t{dtRows["LastName"]}   \t{dtRows["Address"]}  \t{dtRows["City"]}  \t{dtRows["State"]} \t{dtRows["ZipCode"]}  \t{dtRows["PhoneNumber"]} \t{dtRows["EmailId"]}");
+                }
+            }
+            else
+                Console.WriteLine("No DataTable Found");            
         }
     }
 }
