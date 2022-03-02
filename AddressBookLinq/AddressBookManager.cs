@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace AddressBookLinq
 {
     /// <summary>
-    /// Created AddressBook Manager To Manage The AddressBook Contacts(UC1)
+    /// Created AddressBook Manager To Manage The AddressBook Contacts(UC1ToUC10)
     /// </summary>
     public class AddressBookManager
     {
