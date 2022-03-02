@@ -108,7 +108,7 @@ namespace AddressBookLinq
             return dataTable;
         }
 
-        //Method to insert default values into the addressbook table(UC2)
+        //Method to insert default values into the addressbook table(UC2&&UC10)
         public static string InsertDefaultValuesIntoTable()
         {
             if (dataTable != null)
@@ -119,7 +119,9 @@ namespace AddressBookLinq
                     new AddressBook() {FirstName="Yash", LastName="Verma", Address="Ghansoli", City="NaviMumbai", State="Maharashta", EmailId="abc12@gmail.com", PhoneNumber=9876542130, ZipCode=400789, AddressBookName="Home", ContactType="Family"},
                     new AddressBook() {FirstName="Mansi", LastName="Verma", Address="Ghansoli", City="NaviMumbai", State="Maharashta", EmailId="abc13@gmail.com", PhoneNumber=9875462130, ZipCode=400965, AddressBookName="Home", ContactType="Family"},
                     new AddressBook() {FirstName="Ajay", LastName="Matkar", Address="Chembur", City="Mumbai", State="Maharashta", EmailId="abc143@gmail.com", PhoneNumber=9874563120, ZipCode=400456, AddressBookName="College", ContactType="Friends"},
+                    new AddressBook() {FirstName="Ajay", LastName="Matkar", Address="Chembur", City="Mumbai", State="Maharashta", EmailId="abc143@gmail.com", PhoneNumber=9874563120, ZipCode=400456, AddressBookName="College", ContactType="Family"},
                     new AddressBook() {FirstName="Aman", LastName="Nikam", Address="Borivai", City="Mumbai", State="Maharashta", EmailId="abc183@gmail.com", PhoneNumber=9874561230, ZipCode=400159, AddressBookName="College", ContactType="Friends"},
+                    new AddressBook() {FirstName="Aman", LastName="Nikam", Address="Borivai", City="Mumbai", State="Maharashta", EmailId="abc183@gmail.com", PhoneNumber=9874561230, ZipCode=400159, AddressBookName="College", ContactType="Family"},
                     new AddressBook() {FirstName="Omkar", LastName="Kondvilkar", Address="Andheri", City="Mumbai", State="Maharashta", EmailId="abc173@gmail.com", PhoneNumber=9478562130, ZipCode=400258, AddressBookName="College", ContactType="Friends"},
                     new AddressBook() {FirstName="Vaibhav", LastName="Patil", Address="Kalyan", City="Mumbai", State="Maharashta", EmailId="abc133@gmail.com", PhoneNumber=9748562130, ZipCode=400426, AddressBookName="Office", ContactType="Profession"},
                     new AddressBook() {FirstName="Apurva", LastName="Puran", Address="Andheri", City="Mumbai", State="Maharashta", EmailId="abc113@gmail.com", PhoneNumber=9874265130, ZipCode=400705, AddressBookName="Office", ContactType="Profession"},
