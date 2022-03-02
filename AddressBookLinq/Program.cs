@@ -13,7 +13,10 @@ namespace AddressBookLinq
         {
             //Displaying welcome message
             Console.WriteLine("Welcome To The AddressBook Program Using Linq And DataTable");
-            Console.ReadLine(); 
+
+            //Calling the method to createtable(UC1)
+            AddressBookManager.CreateDataTable();
+            Console.ReadLine();
         }
     }
 }
