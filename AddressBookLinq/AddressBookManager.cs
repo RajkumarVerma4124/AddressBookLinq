@@ -177,6 +177,33 @@ namespace AddressBookLinq
                 return "No DataTable Found";          
         }
 
+        //Retrieve contacts from datatable based on city or state
+        public static string RetrieveContactBasedOnCityorState(string city, string state)
+        {
+            if (dataTable != null)
+            {
+                InsertDefaultValuesIntoTable();
+                var contactList = (from contact in dataTable.AsEnumerable() where (contact.Field<string>("State") == state || contact.Field<string>("City") == city) select contact);
+                if(contactList.Count() != 0)
+                {
+                    foreach (DataColumn dtColumns in dataTable.Columns)
+                    {
+                        Console.Write(dtColumns + "    \t");
+                    }
+                    Console.WriteLine();
+                    foreach (var dtRows in contactList)
+                    {
+                        Console.WriteLine("{0}\t\t{1}   \t{2}   \t{3}  \t{4}  \t{5}  \t{6} \t{7}", dtRows["FirstName"], dtRows["LastName"], dtRows["Address"], dtRows["City"], dtRows["State"], dtRows["ZipCode"], dtRows["PhoneNumber"], dtRows["EmailId"]);
+                    }
+                    return $"Found The Given Contacts Successfully";
+                }
+                else
+                    return "The Given Contact Is Not Found";
+            }
+            else
+                return $"No DataTable Found";         
+        }
+
         //Method to display all datatable values(UC2)
         public static void DisplayDataTable()
         {

@@ -58,5 +58,17 @@ namespace AddressBookLinqTesting
             var actual = AddressBookManager.DeleteContactInDataTable(fname);
             Assert.AreEqual(expected, actual);
         }
+
+        //Testing to check the contact data is retrieved or not from the datatable based on state or city(UC5-TC5.1)
+        [TestMethod]
+        [DataRow("Mumbai", "Maharshtra", "Found The Given Contacts Successfully")]
+        [DataRow("NaviMumbai", "Maharshtra", "Found The Given Contacts Successfully")]
+        [DataRow("NM", "MH", "The Given Contact Is Not Found")]
+        public void TestRetrieveContactBasedOnCityOrState(string city, string state, string expected)
+        {
+            AddressBookManager.CreateDataTable();
+            var actual = AddressBookManager.RetrieveContactBasedOnCityorState(city,state);
+            Assert.AreEqual(expected, actual);
+        }
     }
 }
