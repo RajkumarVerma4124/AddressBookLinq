@@ -92,5 +92,15 @@ namespace AddressBookLinqTesting
             var actual = AddressBookManager.GivenCitySortContactBasedOnName(city);
             Assert.AreEqual(expected, actual);
         }
+
+        //Testing to check the contact count is retrieved or not from the datatable based on persons type(UC9-TC9.1)
+        [TestMethod]
+        [DataRow("Found The Given Contacts Successfully")]
+        public void TestRetrieveContactCountBasedOnPersonsType(string expected)
+        {
+            AddressBookManager.CreateDataTable();
+            var actual = AddressBookManager.RetrieveCountBasedOnCityorState();
+            Assert.AreEqual(expected, actual);
+        }
     }
 }

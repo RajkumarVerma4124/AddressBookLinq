@@ -267,6 +267,27 @@ namespace AddressBookLinq
                 return $"No DataTable Found";
         }
 
+        //Retrieve person type count from datatable(UC9)
+        public static string RetrieveCountBasedOnPersonType()
+        {
+            if (dataTable != null)
+            {
+                var contactList = (from contact in dataTable.AsEnumerable().GroupBy(c => new { type = c["ContactType"] }) select contact);
+                if (contactList.Count() != 0)
+                {
+                    foreach (var contact in contactList)
+                    {
+                        Console.WriteLine($"Persons Type : {contact.Key.type}    \tPersons Count : {contact.Count()}");
+                    }
+                    return "Found The Given Contacts Successfully";
+                }
+                else
+                    return "No Contact Found";
+            }
+            else
+                return $"No DataTable Found";
+        }
+
         //Method to display all datatable values(UC2&&UC8)
         public static void DisplayDataTable()
         {

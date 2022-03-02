@@ -22,7 +22,7 @@ namespace AddressBookLinq
                 while(true)
                 {
                     Console.WriteLine("1: Create DataTable And Insert Default Contact Into DataTable \n2: Insert New Contact Into DataTable \n3: Display DataTable \n4: Edit Contact"+
-                        "\n5: Deleted Contact \n6: Retrieve Contact Based On City Or State \n7: Count Or Size Based On City Or State \n8: Sorted Records \n9: Exit");
+                        "\n5: Deleted Contact \n6: Retrieve Contact Based On City Or State \n7: Count Or Size Based On City Or State \n8: Sorted Records \n9: Count By Persons Type \n10: Exit");
                     Console.Write("Enter a choice from above : ");
                     bool flag = int.TryParse(Console.ReadLine(), out int choice);
                     if(flag)
@@ -103,6 +103,11 @@ namespace AddressBookLinq
                                 Console.WriteLine(resStr);
                                 break;
                             case 9:
+                                //Calling the method to count by person type from addressbook table(UC9)
+                                resStr = AddressBookManager.RetrieveCountBasedOnPersonType();
+                                Console.WriteLine(resStr);
+                                break;
+                            case 10:
                                 Environment.Exit(0);
                                 break;
                             default:
