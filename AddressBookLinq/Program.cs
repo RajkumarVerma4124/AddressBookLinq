@@ -22,7 +22,7 @@ namespace AddressBookLinq
                 while(true)
                 {
                     Console.WriteLine("1: Create DataTable \n2: Insert Default Contact Into DataTable \n3: Insert New Contact Into DataTable \n4: Display DataTable \n5: Edit Contact"+
-                        "\n6: Exit");
+                        "\n6: Deleted Contact \n7: Exit");
                     Console.Write("Enter a choice from above : ");
                     bool flag = int.TryParse(Console.ReadLine(), out int choice);
                     if(flag)
@@ -66,16 +66,23 @@ namespace AddressBookLinq
                                 break;
                             case 5:
                                 //Calling the method to edit addressbook table(UC3)
-                                Console.WriteLine("Enter The First Name Of The Contact To Modify : ");
+                                Console.Write("Enter The First Name Of The Contact To Modify : ");
                                 string fName = Console.ReadLine();  
-                                Console.WriteLine("Enter The Column Name Exactly To Modify : ");
+                                Console.Write("Enter The Column Name Exactly To Modify : ");
                                 string cName = Console.ReadLine();
-                                Console.WriteLine("Enter The New Value For The Coulumn : ");
+                                Console.Write("Enter The New Value For The Coulumn : ");
                                 string cValue = Console.ReadLine();
                                 resStr = AddressBookManager.EditAddressBookDataTable(fName, cName, cValue);
                                 Console.WriteLine(resStr);
                                 break;
                             case 6:
+                                //Calling the method to delete a contact from addressbook table(UC4)
+                                Console.Write("Enter The First Name Of The Contact To Delete : ");
+                                string firstName = Console.ReadLine();
+                                resStr = AddressBookManager.DeleteContactInDataTable(firstName);
+                                Console.WriteLine(resStr);
+                                break;
+                            case 7:
                                 Environment.Exit(0);
                                 break;
                             default:

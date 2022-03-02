@@ -132,7 +132,7 @@ namespace AddressBookLinq
                 return "No DataTable Found";           
         }
 
-        //Method to edit existing contact(UC3)
+        //Method to edit existing contact from datatable(UC3)
         public static string EditAddressBookDataTable(string firstName, string columnName, string columnValue)
         {
             try
@@ -155,6 +155,26 @@ namespace AddressBookLinq
             {
                 return ex.Message;
             }
+        }
+
+        //Method to delete exsiting contact from datatable(UC4)
+        public static string DeleteContactInDataTable(string FirstName)
+        {
+            if(dataTable != null)
+            {
+                InsertDefaultValuesIntoTable();
+                var contactList = (from contact in dataTable.AsEnumerable() where contact.Field<string>("FirstName") == FirstName select contact).FirstOrDefault();
+                if (contactList != null)
+                {
+                    contactList.Delete();
+                    DisplayDataTable();
+                    return $"Deleted The Given Contact {FirstName} Successfully";
+                }
+                else 
+                    return "The Given Contact Is Not Found";
+            }
+            else
+                return "No DataTable Found";          
         }
 
         //Method to display all datatable values(UC2)

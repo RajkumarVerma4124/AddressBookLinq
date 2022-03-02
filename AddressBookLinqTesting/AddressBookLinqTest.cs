@@ -47,5 +47,16 @@ namespace AddressBookLinqTesting
             var actual = AddressBookManager.EditAddressBookDataTable(fname, columnName, cValue);
             Assert.AreEqual(expected, actual);
         }
+
+        //Testing to check the contact data is deletd or not from the datatable(UC4-TC4.1)
+        [TestMethod]
+        [DataRow("Aman", "Deleted The Given Contact Aman Successfully")]
+        [DataRow("abcd", "The Given Contact Is Not Found")]
+        public void TestDeleteContactTable(string fname, string expected)
+        {
+            AddressBookManager.CreateDataTable();
+            var actual = AddressBookManager.DeleteContactInDataTable(fname);
+            Assert.AreEqual(expected, actual);
+        }
     }
 }
