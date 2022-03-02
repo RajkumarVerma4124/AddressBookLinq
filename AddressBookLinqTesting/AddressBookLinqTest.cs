@@ -35,5 +35,17 @@ namespace AddressBookLinqTesting
             var actual = AddressBookManager.InsertNewContactTable(addressBook);
             Assert.AreEqual(actual, expected);
         }
+
+        //Testing to check the data is edited or not in the datatable(UC3-TC3.1)
+        [TestMethod]
+        [DataRow("Aman", "Address", "Dombivali", "Modified DataTable Successfully")]
+        [DataRow("Aman", "Addresss", "Dombivali", "Column 'Addresss' does not belong to table AddressBookLinq.")]
+        public void TestEditContactTable(string fname,  string columnName, string cValue, string expected)
+        {
+            AddressBookManager.CreateDataTable();
+            AddressBookManager.InsertDefaultValuesIntoTable();
+            var actual = AddressBookManager.EditAddressBookDataTable(fname, columnName, cValue);
+            Assert.AreEqual(expected, actual);
+        }
     }
 }

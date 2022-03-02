@@ -21,7 +21,8 @@ namespace AddressBookLinq
             {
                 while(true)
                 {
-                    Console.WriteLine("1: Create DataTable \n2: Insert Default Contact Into DataTable \n3: Insert New Contact Into DataTable \n4: Display DataTable \n5: Exit");
+                    Console.WriteLine("1: Create DataTable \n2: Insert Default Contact Into DataTable \n3: Insert New Contact Into DataTable \n4: Display DataTable \n5: Edit Contact"+
+                        "\n6: Exit");
                     Console.Write("Enter a choice from above : ");
                     bool flag = int.TryParse(Console.ReadLine(), out int choice);
                     if(flag)
@@ -64,6 +65,17 @@ namespace AddressBookLinq
                                 AddressBookManager.DisplayDataTable();
                                 break;
                             case 5:
+                                //Calling the method to edit addressbook table(UC3)
+                                Console.WriteLine("Enter The First Name Of The Contact To Modify : ");
+                                string fName = Console.ReadLine();  
+                                Console.WriteLine("Enter The Column Name Exactly To Modify : ");
+                                string cName = Console.ReadLine();
+                                Console.WriteLine("Enter The New Value For The Coulumn : ");
+                                string cValue = Console.ReadLine();
+                                resStr = AddressBookManager.EditAddressBookDataTable(fName, cName, cValue);
+                                Console.WriteLine(resStr);
+                                break;
+                            case 6:
                                 Environment.Exit(0);
                                 break;
                             default:
@@ -80,6 +92,7 @@ namespace AddressBookLinq
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
+                Console.ReadLine();
             }
         }
     }

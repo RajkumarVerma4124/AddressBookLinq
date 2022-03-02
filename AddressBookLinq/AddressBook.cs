@@ -20,12 +20,5 @@ namespace AddressBookLinq
         public long PhoneNumber { get; set; }
         public int ZipCode { get; set; }
         public string EmailId { get; set; }
-
-        //Method to override string method(UC5)
-        public override string ToString()
-        {
-            return $"First Name : {FirstName} || Last Name : {LastName} \nAddress : {Address} || City : {City} || State : {State} || ZipCode = {ZipCode}" +
-                $"\nPhone No : {PhoneNumber} \nEmail Id : {EmailId}";
-        }
     }
 }

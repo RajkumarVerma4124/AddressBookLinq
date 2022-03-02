@@ -132,6 +132,31 @@ namespace AddressBookLinq
                 return "No DataTable Found";           
         }
 
+        //Method to edit existing contact(UC3)
+        public static string EditAddressBookDataTable(string firstName, string columnName, string columnValue)
+        {
+            try
+            {
+                if (dataTable != null)
+                {
+                    var contactList = (from contact in dataTable.AsEnumerable() where contact.Field<string>("FirstName") == firstName select contact).FirstOrDefault();
+                    if (contactList != null)
+                    {
+                        contactList[columnName] = columnValue;
+                        DisplayDataTable();
+                        return $"Modified DataTable Successfully";
+                    }
+                    else return default;
+                }
+                else
+                    return "No DataTable Found";
+            }
+            catch (Exception ex)
+            {
+                return ex.Message;
+            }
+        }
+
         //Method to display all datatable values(UC2)
         public static void DisplayDataTable()
         {
