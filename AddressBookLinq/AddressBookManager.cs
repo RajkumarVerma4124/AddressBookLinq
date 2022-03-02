@@ -86,6 +86,23 @@ namespace AddressBookLinq
             dtColumn.Caption = "Email Id";
             //Adding column to the DataColumnCollection.  
             dataTable.Columns.Add(dtColumn);
+
+            //Creating addressbookname column.    
+            dtColumn = new DataColumn();
+            dtColumn.DataType = typeof(string);
+            dtColumn.ColumnName = "AddressBookName";
+            dtColumn.Caption = "AddressBook Name";
+            //Adding column to the DataColumnCollection.  
+            dataTable.Columns.Add(dtColumn);
+
+            //Creating contact type column.    
+            dtColumn = new DataColumn();
+            dtColumn.DataType = typeof(string);
+            dtColumn.ColumnName = "ContactType";
+            dtColumn.Caption = "Contact Type";
+            //Adding column to the DataColumnCollection.  
+            dataTable.Columns.Add(dtColumn);
+
             InsertDefaultValuesIntoTable();
             Console.WriteLine("Created the datatable and inserted the data successfuly");
             return dataTable;
@@ -98,21 +115,21 @@ namespace AddressBookLinq
             {
                 List<AddressBook> addressBooks = new List<AddressBook>()
                 {
-                    new AddressBook() {FirstName="Raj", LastName="Verma", Address="Ghansoli", City="NaviMumbai", State="Maharashta", EmailId="abc123@gmail.com", PhoneNumber=9874562130, ZipCode=745821},
-                    new AddressBook() {FirstName="Yash", LastName="Verma", Address="Ghansoli", City="NaviMumbai", State="Maharashta", EmailId="abc12@gmail.com", PhoneNumber=9876542130, ZipCode=400789},
-                    new AddressBook() {FirstName="Mansi", LastName="Verma", Address="Ghansoli", City="NaviMumbai", State="Maharashta", EmailId="abc13@gmail.com", PhoneNumber=9875462130, ZipCode=400965},
-                    new AddressBook() {FirstName="Ajay", LastName="Matkar", Address="Chembur", City="Mumbai", State="Maharashta", EmailId="abc143@gmail.com", PhoneNumber=9874563120, ZipCode=400456},
-                    new AddressBook() {FirstName="Aman", LastName="Nikam", Address="Borivai", City="Mumbai", State="Maharashta", EmailId="abc183@gmail.com", PhoneNumber=9874561230, ZipCode=400159},
-                    new AddressBook() {FirstName="Omkar", LastName="Kondvilkar", Address="Andheri", City="Mumbai", State="Maharashta", EmailId="abc173@gmail.com", PhoneNumber=9478562130, ZipCode=400258},
-                    new AddressBook() {FirstName="Vaibhav", LastName="Patil", Address="Kalyan", City="Mumbai", State="Maharashta", EmailId="abc133@gmail.com", PhoneNumber=9748562130, ZipCode=400426},
-                    new AddressBook() {FirstName="Apurva", LastName="Puran", Address="Andheri", City="Mumbai", State="Maharashta", EmailId="abc113@gmail.com", PhoneNumber=9874265130, ZipCode=400705},
-                    new AddressBook() {FirstName="Amit", LastName="Pawar", Address="Govandi", City="NaviMumbai", State="Maharashta", EmailId="abc103@gmail.com", PhoneNumber=9726562130, ZipCode=400706},
+                    new AddressBook() {FirstName="Raj", LastName="Verma", Address="Ghansoli", City="NaviMumbai", State="Maharashta", EmailId="abc123@gmail.com", PhoneNumber=9874562130, ZipCode=745821, AddressBookName="Home", ContactType="Family"},
+                    new AddressBook() {FirstName="Yash", LastName="Verma", Address="Ghansoli", City="NaviMumbai", State="Maharashta", EmailId="abc12@gmail.com", PhoneNumber=9876542130, ZipCode=400789, AddressBookName="Home", ContactType="Family"},
+                    new AddressBook() {FirstName="Mansi", LastName="Verma", Address="Ghansoli", City="NaviMumbai", State="Maharashta", EmailId="abc13@gmail.com", PhoneNumber=9875462130, ZipCode=400965, AddressBookName="Home", ContactType="Family"},
+                    new AddressBook() {FirstName="Ajay", LastName="Matkar", Address="Chembur", City="Mumbai", State="Maharashta", EmailId="abc143@gmail.com", PhoneNumber=9874563120, ZipCode=400456, AddressBookName="College", ContactType="Friends"},
+                    new AddressBook() {FirstName="Aman", LastName="Nikam", Address="Borivai", City="Mumbai", State="Maharashta", EmailId="abc183@gmail.com", PhoneNumber=9874561230, ZipCode=400159, AddressBookName="College", ContactType="Friends"},
+                    new AddressBook() {FirstName="Omkar", LastName="Kondvilkar", Address="Andheri", City="Mumbai", State="Maharashta", EmailId="abc173@gmail.com", PhoneNumber=9478562130, ZipCode=400258, AddressBookName="College", ContactType="Friends"},
+                    new AddressBook() {FirstName="Vaibhav", LastName="Patil", Address="Kalyan", City="Mumbai", State="Maharashta", EmailId="abc133@gmail.com", PhoneNumber=9748562130, ZipCode=400426, AddressBookName="Office", ContactType="Profession"},
+                    new AddressBook() {FirstName="Apurva", LastName="Puran", Address="Andheri", City="Mumbai", State="Maharashta", EmailId="abc113@gmail.com", PhoneNumber=9874265130, ZipCode=400705, AddressBookName="Office", ContactType="Profession"},
+                    new AddressBook() {FirstName="Amit", LastName="Pawar", Address="Govandi", City="NaviMumbai", State="Maharashta", EmailId="abc103@gmail.com", PhoneNumber=9726562130, ZipCode=400706, AddressBookName="Office", ContactType="Profession"},
                 };
                 //Adding values to datatable
                 foreach (var contact in addressBooks)
                 {
                     //adding rows from addressbook to data table rows
-                    dataTable.Rows.Add(contact.FirstName, contact.LastName, contact.Address, contact.City, contact.State, contact.ZipCode, contact.PhoneNumber, contact.EmailId);
+                    dataTable.Rows.Add(contact.FirstName, contact.LastName, contact.Address, contact.City, contact.State, contact.ZipCode, contact.PhoneNumber, contact.EmailId, contact.AddressBookName, contact.ContactType);
                 }
                 return "Added The Data Successfully Into The Table";
             }
@@ -126,7 +143,7 @@ namespace AddressBookLinq
             if(dataTable != null)
             {
                 //Adding to the table datarow 
-                dataTable.Rows.Add(contact.FirstName, contact.LastName, contact.Address, contact.City, contact.State, contact.ZipCode, contact.PhoneNumber, contact.EmailId);
+                dataTable.Rows.Add(contact.FirstName, contact.LastName, contact.Address, contact.City, contact.State, contact.ZipCode, contact.PhoneNumber, contact.EmailId, contact.AddressBookName, contact.ContactType);
                 return "Added The Data Successfully Into The Table";
             }
             else
@@ -177,7 +194,7 @@ namespace AddressBookLinq
                 return "No DataTable Found";          
         }
 
-        //Retrieve contacts from datatable based on city or state(UC5)
+        //Retrieve contacts from datatable based on city or state(UC5&&UC8)
         public static string RetrieveContactBasedOnCityorState(string city, string state)
         {
             if (dataTable != null)
@@ -192,7 +209,7 @@ namespace AddressBookLinq
                     Console.WriteLine();
                     foreach (var dtRows in contactList)
                     {
-                        Console.WriteLine("{0}\t\t{1}   \t{2}   \t{3}  \t{4}  \t{5}  \t{6} \t{7}", dtRows["FirstName"], dtRows["LastName"], dtRows["Address"], dtRows["City"], dtRows["State"], dtRows["ZipCode"], dtRows["PhoneNumber"], dtRows["EmailId"]);
+                        Console.WriteLine("{0}\t\t{1}   \t{2}   \t{3}  \t{4}  \t{5}  \t{6} \t{7} \t{8}    \t{9}", dtRows["FirstName"], dtRows["LastName"], dtRows["Address"], dtRows["City"], dtRows["State"], dtRows["ZipCode"], dtRows["PhoneNumber"], dtRows["EmailId"], dtRows["AddressBookName"], dtRows["ContactType"]);
                     }
                     return $"Found The Given Contacts Successfully";
                 }
@@ -224,7 +241,7 @@ namespace AddressBookLinq
                 return $"No DataTable Found";
         }
 
-        //Retrieve sorted contacts from datatable by giving city (UC7)
+        //Retrieve sorted contacts from datatable by giving city (UC7&&UC8)
         public static string GivenCitySortContactBasedOnName(string city)
         {
             if (dataTable != null)
@@ -239,7 +256,7 @@ namespace AddressBookLinq
                     Console.WriteLine();
                     foreach (var dtRows in contactList)
                     {
-                        Console.WriteLine("{0}\t\t{1}   \t{2}   \t{3}  \t{4}  \t{5}  \t{6} \t{7}", dtRows["FirstName"], dtRows["LastName"], dtRows["Address"], dtRows["City"], dtRows["State"], dtRows["ZipCode"], dtRows["PhoneNumber"], dtRows["EmailId"]);
+                        Console.WriteLine("{0}\t\t{1}   \t{2}   \t{3}  \t{4}  \t{5}  \t{6} \t{7} \t{8}    \t{9}", dtRows["FirstName"], dtRows["LastName"], dtRows["Address"], dtRows["City"], dtRows["State"], dtRows["ZipCode"], dtRows["PhoneNumber"], dtRows["EmailId"], dtRows["AddressBookName"], dtRows["ContactType"]);
                     }
                     return $"Found The Given Contacts Successfully";
                 }
@@ -250,7 +267,7 @@ namespace AddressBookLinq
                 return $"No DataTable Found";
         }
 
-        //Method to display all datatable values(UC2)
+        //Method to display all datatable values(UC2&&UC8)
         public static void DisplayDataTable()
         {
             if(dataTable != null)
@@ -262,7 +279,7 @@ namespace AddressBookLinq
                 Console.WriteLine();
                 foreach (DataRow dtRows in dataTable.Rows)
                 {
-                    Console.WriteLine($"{dtRows["FirstName"]}\t\t{dtRows["LastName"]}   \t{dtRows["Address"]}  \t{dtRows["City"]}  \t{dtRows["State"]} \t{dtRows["ZipCode"]}  \t{dtRows["PhoneNumber"]} \t{dtRows["EmailId"]}");
+                    Console.WriteLine($"{dtRows["FirstName"]}\t\t{dtRows["LastName"]}   \t{dtRows["Address"]}  \t{dtRows["City"]}  \t{dtRows["State"]} \t{dtRows["ZipCode"]}  \t{dtRows["PhoneNumber"]} \t{dtRows["EmailId"]} \t{dtRows["AddressBookName"]}    \t{dtRows["ContactType"]}");
                 }
             }
             else

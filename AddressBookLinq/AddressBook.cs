@@ -20,5 +20,7 @@ namespace AddressBookLinq
         public long PhoneNumber { get; set; }
         public int ZipCode { get; set; }
         public string EmailId { get; set; }
+        public string AddressBookName { get; set; }
+        public string ContactType { get; set; }
     }
 }

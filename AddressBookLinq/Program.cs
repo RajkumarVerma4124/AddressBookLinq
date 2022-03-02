@@ -52,6 +52,10 @@ namespace AddressBookLinq
                                 contact.PhoneNumber = Convert.ToInt64(Console.ReadLine());
                                 Console.Write("Enter Your EmailId : ");
                                 contact.EmailId = Console.ReadLine();
+                                Console.Write("Enter Your AddressBook Name : ");
+                                contact.AddressBookName = Console.ReadLine();
+                                Console.Write("Enter The Contact Type : ");
+                                contact.ContactType = Console.ReadLine();
                                 resStr = AddressBookManager.InsertNewContactTable(contact);
                                 Console.WriteLine(resStr);
                                 break;
