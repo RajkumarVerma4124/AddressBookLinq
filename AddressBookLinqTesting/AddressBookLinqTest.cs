@@ -70,5 +70,15 @@ namespace AddressBookLinqTesting
             var actual = AddressBookManager.RetrieveContactBasedOnCityorState(city,state);
             Assert.AreEqual(expected, actual);
         }
+
+        //Testing to check the contact count is retrieved or not from the datatable based on state or city(UC6-TC6.1)
+        [TestMethod]
+        [DataRow("Found The Given Contacts Successfully")]
+        public void TestRetrieveContactCountBasedOnCityOrState(string expected)
+        {
+            AddressBookManager.CreateDataTable();
+            var actual = AddressBookManager.RetrieveCountBasedOnCityorState();
+            Assert.AreEqual(expected, actual);
+        }
     }
 }

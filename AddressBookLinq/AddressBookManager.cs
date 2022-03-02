@@ -177,7 +177,7 @@ namespace AddressBookLinq
                 return "No DataTable Found";          
         }
 
-        //Retrieve contacts from datatable based on city or state
+        //Retrieve contacts from datatable based on city or state(UC5)
         public static string RetrieveContactBasedOnCityorState(string city, string state)
         {
             if (dataTable != null)
@@ -202,6 +202,23 @@ namespace AddressBookLinq
             }
             else
                 return $"No DataTable Found";         
+        }
+
+        //Retrieve contacts from datatable based on city or state(UC5)
+        public static string RetrieveCountBasedOnCityorState()
+        {
+            if (dataTable != null)
+            {
+                InsertDefaultValuesIntoTable();
+                var contactList = (from contact in dataTable.AsEnumerable().GroupBy(c => new { city = c["City"], state = c["State"] }) select contact);
+                foreach (var contact in contactList)
+                {
+                    Console.WriteLine($"City : {contact.Key.city} \tCount : {contact.Count()} \tState : {contact.Key.state} \tCount : {contact.Count()}");
+                }
+                return "Found The Given Contacts Successfully";
+            }
+            else
+                return $"No DataTable Found";
         }
 
         //Method to display all datatable values(UC2)
